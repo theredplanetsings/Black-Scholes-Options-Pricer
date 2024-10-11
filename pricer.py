@@ -11,10 +11,10 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import re
 from fractions import Fraction
 
-# Configure logging
+#Configures logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-info_window = None  # Global variable to keep track of the info window
+info_window = None  #A global variable to keep track of the info window
 
 def black_scholes(S, K, T, r, sigma, q, option_type='call'):
     d1 = (math.log(S / K) + (r - q + 0.5 * sigma ** 2) * T) / (sigma * math.sqrt(T))
@@ -86,17 +86,17 @@ def plot_option_prices_with_info(ticker, K, T, r, sigma, q, call_price, put_pric
     ax.legend()
     ax.grid(True)
     plt.xticks(rotation=45)
-    fig.tight_layout()  # Adjust layout
+    fig.tight_layout()  #Adjusts layout
 
-    # Create a new window for the graph
+    #Creates a new window for the graph
     graph_window = tk.Toplevel()
     graph_window.title(f"{ticker} Option Prices Graph")
 
-    # Create a frame for the calculation info
+    #Creates a frame for the calculation info
     info_frame = tk.Frame(graph_window)
     info_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-    # Add calculation info to the frame
+    #Adds the calculation info to the frame
     info_label = tk.Label(info_frame, text=f"Implied Volatility: {sigma * 100:.2f}%\n"
                                            f"Risk-Free Rate: {r * 100:.2f}%\n"
                                            f"Maturity: {T} years\n"
@@ -104,7 +104,7 @@ def plot_option_prices_with_info(ticker, K, T, r, sigma, q, call_price, put_pric
                                            f"Put Option Price: {put_price}")
     info_label.pack(padx=10, pady=10)
 
-    # Add the graph to the window
+    #Adds the graph to the window
     canvas = FigureCanvasTkAgg(fig, master=graph_window)
     canvas.draw()
     canvas.get_tk_widget().pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
@@ -133,11 +133,11 @@ def display_stock_info(ticker):
         info = fetch_detailed_stock_info(ticker)
         info_text = "\n".join([f"{key}: {value}" for key, value in info.items()])
         
-        # Create a new window for the stock information
+        #Creates a new window for the stock information
         info_window = tk.Toplevel()
         info_window.title(f"{ticker} Stock Information")
         
-        # Add the stock information to the window
+        #Adds the stock information to the window
         info_label = tk.Label(info_window, text=info_text, justify=tk.LEFT, padx=10, pady=10)
         info_label.pack(fill=tk.BOTH, expand=True)
         
@@ -156,13 +156,13 @@ def plot_interactive_graph(ticker, period):
         ax.legend()
         ax.grid(True)
         plt.xticks(rotation=45)
-        fig.tight_layout()  # Adjust layout
+        fig.tight_layout()  #Adjusts layout
 
-        # Create a new window for the graph
+        #Creates a new window for the graph
         graph_window = tk.Toplevel()
         graph_window.title(f"{ticker} Price History Graph")
 
-        # Add the graph to the window
+        #Adds the graph to the window
         canvas = FigureCanvasTkAgg(fig, master=graph_window)
         canvas.draw()
         canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
@@ -182,12 +182,12 @@ def validate_inputs(*inputs, numeric=False):
     return True
 
 def validate_ticker(ticker):
-    # Check if the ticker contains only letters and numbers
+    #Checks if the ticker contains only letters and numbers
     return bool(re.match("^[A-Za-z0-9]+$", ticker))
 
 def validate_maturity(maturity):
     try:
-        # Try to convert the maturity to a fraction
+        #Tries to convert the maturity to a fraction
         Fraction(maturity)
         return True
     except ValueError:
@@ -196,9 +196,9 @@ def validate_maturity(maturity):
 def create_gui():
     root = tk.Tk()
     root.title("Black-Scholes Option Pricer")
-    root.geometry("600x400")  # Increase the initial size of the window
+    root.geometry("600x400")  #Increases the initial size of the window
 
-    # Create a frame to center the content
+    #Creates a frame to center the content
     main_frame = tk.Frame(root)
     main_frame.grid(row=0, column=0, sticky="nsew")
 
@@ -237,9 +237,9 @@ def create_gui():
             try:
                 S = float(S)
                 K = float(K)
-                T = float(Fraction(T))  # Convert to decimal
-                r = float(r) / 100  # Convert to decimal
-                implied_volatility = float(implied_volatility) / 100  # Convert to decimal
+                T = float(Fraction(T))  #Converts to decimal
+                r = float(r) / 100  #Converts to decimal
+                implied_volatility = float(implied_volatility) / 100  #Converts to decimal
                 calculate_and_display_prices(ticker, S, K, T, r, implied_volatility)
             except ValueError:
                 messagebox.showerror("Input Error", "Please enter valid numerical values for all fields.")
@@ -288,7 +288,7 @@ def create_gui():
     exit_button = tk.Button(root, text="Exit", command=on_exit)
     exit_button.place(relx=1.0, rely=0.0, anchor='ne')
 
-    # Configure grid weights to make the window scalable
+    #Configures grid weights to make the window scalable
     root.grid_columnconfigure(0, weight=1)
     root.grid_rowconfigure(0, weight=1)
     main_frame.grid_columnconfigure(0, weight=1)
