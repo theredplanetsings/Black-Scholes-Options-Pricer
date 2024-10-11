@@ -8,6 +8,7 @@ This project is a graphical user interface (GUI) application for pricing options
 - Calculate call and put option prices using the Black-Scholes model.
 - Display historical price data for different periods.
 - Plot option prices and historical price data in interactive graphs.
+- Store calculated option prices in an SQLite database.
 
 ## Requirements
 
