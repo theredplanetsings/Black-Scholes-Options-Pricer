@@ -11,6 +11,9 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import re
 from fractions import Fraction
 
+__author__ = "https://github.com/theredplanetsings"
+__date__ = "08/10/2024"
+
 #Configures logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
